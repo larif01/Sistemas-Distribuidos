@@ -17,6 +17,7 @@ Site: [https://ubuntu.com/download/desktop](https://ubuntu.com/download/desktop)
 ETAPA 2 – Criar e Configurar as Máquinas Virtuais
 Crie DUAS VMs no VirtualBox
 Para cada VM:
+Abra o VirtualBox > clique em "Novo"
 Tipo: Linux
 Versão: Ubuntu (64-bit)
 Memória: pelo menos 2048 MB
@@ -24,14 +25,23 @@ Disco: 15 GB
 Nomeie como: vm-gerente e vm-executora
 Configure a rede das VMs
 Ambas devem estar na mesma rede interna:
-Vá em Configurações da VM → Rede
-Em "Adaptador 1", marque:
-Ativar Placa de Rede
-Modo de Conexão: Rede Interna
-Nome: rede-mpi
-Assim elas estarão em uma rede local 192.168.X.X simulada.
+Com a VM desligada, vá em:
+VM → Configurações → Rede
+Mude de NAT para "Placa em modo Bridge"
+Faça isso para ambas as VMs
+Ligue as duas VMs
+Verifique e anote os IPs de cada vm com o comando ip a 
 
 ETAPA 3 – Instalar Ubuntu nas duas VMs
 Inicie cada VM com a ISO
 Instale normalmente o Ubuntu Desktop
 Defina senhas fáceis, como larissa/larissa
+
+ETAPA 4 – Instalar dependências
+Em ambas as VMs, execute:
+sudo apt update && sudo apt install -y python3 python3-pip mpich openssh-server git
+pip3 install mpi4py
+
+ETAPA 4 – Habilitar comunicação entre as VMs
+Na VM1, gere chave SSH:
+ssh-keygen
