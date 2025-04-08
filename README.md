@@ -68,7 +68,7 @@ Para salvar de ctrl+o Enter e ctrl+x para sair
 Teste em cada maquina para ver se funciona, com o comando python3 primos_mpi.py
 Também deve ser criado um arquivo hosts.txt com os IPs de cada vm
 
-ETAPA 6 – Testar a execu
+ETAPA 6 – Testar a execução
 Execute o comando mpiexec -n 4 python3 primos_mpi.py
 #o número quatro é a quantidade de processos desejados
 A saída caso estaja tudo certo deve ser como no exemplo a seguir:
