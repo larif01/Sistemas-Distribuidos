@@ -1,65 +1,30 @@
+#!/usr/bin/env python3
 from mpi4py import MPI
-import math
 
-def is_prime(n):
-    """Verifica se um número é primo."""
+def eh_primo(n):
     if n < 2:
         return False
-    for i in range(2, int(math.sqrt(n)) + 1):
+    for i in range(2, int(n**0.5) + 1):
         if n % i == 0:
             return False
     return True
 
-def find_primes(start, end):
-    """Encontra números primos em um intervalo."""
-    primes = [n for n in range(start, end) if is_prime(n)]
-    return primes
-
-# Configuração MPI
 comm = MPI.COMM_WORLD
-rank = comm.Get_rank()  # ID do processo
-size = comm.Get_size()  # Número total de processos
+rank = comm.Get_rank()
+size = comm.Get_size()
+MAX_NUM = 100000
+inicio = (rank * MAX_NUM) // size
+fim = ((rank + 1) * MAX_NUM) // size
 
-# Apenas o processo 0 gerencia a distribuição
+# Encontrar primos no intervalo atribuído a este processo
+primos_locais = [n for n in range(inicio, fim) if eh_primo(n)]
+
+# Coletar todos os primos encontrados
+primos_totais = comm.gather(primos_locais, root=0)
+
 if rank == 0:
-    total_primes = []
-    found_primes = 0
-    next_start = 2
-    batch_size = 100  # Define o tamanho do intervalo distribuído a cada worker
-
-    while found_primes < 100:
-        # Distribuir trabalho para os workers
-        for worker in range(1, size):
-            if found_primes >= 100:
-                break
-            comm.send((next_start, next_start + batch_size), dest=worker)
-            next_start += batch_size
-
-        # Receber resultados dos workers
-        for worker in range(1, size):
-            if found_primes >= 100:
-                break
-            primes = comm.recv(source=worker)
-            total_primes.extend(primes)
-            found_primes = len(total_primes)
-            total_primes.sort()
-
-    # Exibir os 100 primeiros primos encontrados
-    print("100 primeiros números primos encontrados:")
-    print(total_primes[:100])
-
-    # Enviar sinal de término para os workers
-    for worker in range(1, size):
-        comm.send(None, dest=worker)
-
-else:
-    while True:
-        task = comm.recv(source=0)
-        if task is None:
-            break  # Sinal de término recebido
-
-        start, end = task
-        primes = find_primes(start, end)
-        comm.send(primes, dest=0)
-
-
+    # Unir todas as listas de primos e ordenar
+    todos_primos = sorted([primo for sublist in primos_totais for primo in sublist])
+    print(f"Total de primos encontrados: {len(todos_primos)}")
+    print(f"Primeiros 10 primos: {todos_primos[:10]}")
+    print(f"Últimos 10 primos: {todos_primos[-10:]}")
