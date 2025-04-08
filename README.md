@@ -9,7 +9,7 @@ Rede configurada para permitir comunicação entre as VMs
 MPI e Python com mpi4py
 
 Clone o repositório nas duas máquinas:
-git clone [https://github.com/larif01/mpi-primos.git]
+git clone https://github.com/larif01/Sistemas-Distribuidos.git
 cd mpi-primos
 
 ETAPA 1 – Instalar Ferramentas no Windows
