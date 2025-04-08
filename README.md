@@ -57,8 +57,8 @@ mpiexec -n 2 hostname
 Na VM gerente, gere chave SSH:
 ssh-keygen
 pressione ENTER em todas as perguntas
-ssh-copy-id user@ip
-Teste com ssh user@ip
+ssh-copy-id larissa@192.168.0.11
+Teste com ssh larissa@192.168.0.11
 Deve entrar sem pedir senha
 
 # ETAPA 6 – Criar o script Python nas duas máquinas
