@@ -1,4 +1,5 @@
-🖥️ Sistemas Distribuidos
+# 🖥️ Sistemas Distribuidos
+
 Demonstrar o uso de MPI para paralelizar a busca de números primos, distribuindo a tarefa entre duas máquinas (simuladas com duas VMs) interconectadas em rede local, conforme os requisitos. Utilizar um framework distribuído (MPI ou PVM).
 
 Requisitos:
