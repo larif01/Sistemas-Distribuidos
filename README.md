@@ -2,24 +2,24 @@
 
 Demonstrar o uso de MPI para paralelizar a busca de números primos, distribuindo a tarefa entre duas máquinas (simuladas com duas VMs) interconectadas em rede local, conforme os requisitos. Utilizar um framework distribuído (MPI ou PVM).
 
-Requisitos:
+# Requisitos:
 1 computador com Windows 10/11
 2 máquinas virtuais Ubuntu (VM1 e VM2)
 VirtualBox 
 Rede configurada para permitir comunicação entre as VMs
 MPI e Python com mpi4py
 
-Clone o repositório nas duas máquinas:
+# Clone o repositório nas duas máquinas:
 git clone https://github.com/larif01/Sistemas-Distribuidos.git
-cd mpi-primos
+cd Sistemas-Distribuidos
 
-ETAPA 1 – Instalar Ferramentas no Windows
+# ETAPA 1 – Instalar Ferramentas no Windows
 Instalar o VirtualBox
 Baixe e instale normalmente.
 Baixar Ubuntu ISO (versão 22.04)
 Site: (https://ubuntu.com/download/desktop)
 
-ETAPA 2 – Criar e Configurar as Máquinas Virtuais
+# ETAPA 2 – Criar e Configurar as Máquinas Virtuais
 Crie DUAS VMs no VirtualBox
 Para cada VM:
 Abra o VirtualBox > clique em "Novo"
@@ -37,12 +37,12 @@ Faça isso para ambas as VMs
 Ligue as duas VMs
 Verifique e anote os IPs de cada vm com o comando ip a 
 
-ETAPA 3 – Instalar Ubuntu nas duas VMs
+# ETAPA 3 – Instalar Ubuntu nas duas VMs
 Inicie cada VM com a ISO
 Instale normalmente o Ubuntu Desktop
 Defina senhas fáceis 
 
-ETAPA 4 – Instalar dependências
+# ETAPA 4 – Instalar dependências
 Em ambas as VMs, execute:
 Atualize o sistema:
 sudo apt update && sudo apt upgrade -y
@@ -53,7 +53,7 @@ pip3 install mpi4py
 Verifique se o MPI está funcionando:
 mpiexec -n 2 hostname
 
-ETAPA 4 – Habilitar comunicação entre as VMs
+# ETAPA 5 – Habilitar comunicação entre as VMs
 Na VM gerente, gere chave SSH:
 ssh-keygen
 pressione ENTER em todas as perguntas
@@ -61,14 +61,14 @@ ssh-copy-id user@ip
 Teste com ssh user@ip
 Deve entrar sem pedir senha
 
-ETAPA 5 – Criar o script Python nas duas máquinas
+# ETAPA 6 – Criar o script Python nas duas máquinas
 Nome do arquivo: primos_mpi.py
 Pode ser criado com o comando nano primos_mpi.py e colando o codigo dentro do arquivo 
 Para salvar de ctrl+o Enter e ctrl+x para sair
 Teste em cada maquina para ver se funciona, com o comando python3 primos_mpi.py
 Também deve ser criado um arquivo hosts.txt com os IPs de cada vm
 
-ETAPA 6 – Testar a execução
+# ETAPA 7 – Testar a execução
 Execute o comando mpiexec -n 4 python3 primos_mpi.py
 #o número quatro é a quantidade de processos desejados
 A saída caso estaja tudo certo deve ser como no exemplo a seguir:
