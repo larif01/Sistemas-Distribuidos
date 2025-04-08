@@ -63,7 +63,8 @@ ETAPA 5 – Criar o script Python nas duas máquinas
 Nome do arquivo: primos_mpi.py
 Pode ser criado com o comando nano primos_mpi.py e colando o codigo dentro do arquivo 
 Para salvar de ctrl+o Enter e ctrl+x para sair
-Teste em cada maquina para ver se funciona, com o comando mpiexec python3 primos_mpi.py
+Teste em cada maquina para ver se funciona, com o comando python3 primos_mpi.py
+Também deve ser criado um arquivo hosts.txt com os IPs de cada vm
 
 ETAPA 6 – Testar a execu
 Execute o comando mpiexec -n 4 python3 primos_mpi.py
