@@ -10,6 +10,7 @@ MPI e Python com mpi4py
 
 Clone o repositório nas duas máquinas:
 git clone [https://github.com/larif01/mpi-primos.git]
+cd mpi-primos
 
 ETAPA 1 – Instalar Ferramentas no Windows
 Instalar o VirtualBox
@@ -54,10 +55,10 @@ mpiexec -n 2 hostname
 ETAPA 4 – Habilitar comunicação entre as VMs
 Na VM gerente, gere chave SSH:
 ssh-keygen
-# pressione ENTER em todas as perguntas
+pressione ENTER em todas as perguntas
 ssh-copy-id user@ip
 Teste com ssh user@ip
-# Deve entrar sem pedir senha
+Deve entrar sem pedir senha
 
 ETAPA 5 – Criar o script Python nas duas máquinas
 Nome do arquivo: primos_mpi.py
